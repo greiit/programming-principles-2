@@ -65,7 +65,7 @@ def draw_objects():
    
    
 def update_snake():
-    global food_pos, score, level
+    global food_pos, score, level,  green_food_pos
     new_head = [snake_pos[0][0] + snake_speed[0], snake_pos[0][1] + snake_speed[1]]
     
     if new_head[0] >= WIDTH:
