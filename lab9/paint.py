@@ -17,7 +17,7 @@ BLUE = (0, 0, 255)
 current_color = BLACK
 
 # Tools
-tools = ['draw', 'rectangle', 'circle', 'eraser']
+tools = ['draw', 'rectangle', 'circle', 'eraser', 'square', 'right triangle', 'equilateral triangle', 'rhombus']
 current_tool = 'draw'
 
 # Drawing variables
@@ -55,6 +55,14 @@ while True:
                 current_tool = 'circle'
             elif event.key == pygame.K_4:
                 current_tool = 'eraser'
+            elif event.key == pygame.K_5:
+                current_tool = 'square'
+            elif event.key == pygame.K_6:
+                current_tool = 'right triangle'
+            elif event.key == pygame.K_7:
+                current_tool = 'equilateral triangle'
+            elif event.key == pygame.K_8:
+                current_tool = 'rhombus'
             # Color selection
             elif event.key == pygame.K_r:
                 current_color = RED
@@ -73,7 +81,28 @@ while True:
                 end_pos = event.pos
                 radius = int(((start_pos[0] - end_pos[0]) ** 2 + (start_pos[1] - end_pos[1]) ** 2) ** 0.5)
                 pygame.draw.circle(screen, current_color, start_pos, radius)
+            elif current_tool == 'square':
+                end_pos = event.pos
+                pygame.draw.rect(screen, current_color, pygame.Rect(start_pos, (min(end_pos[0] - start_pos[0], end_pos[1] - start_pos[1]), min(end_pos[0] - start_pos[0], end_pos[1] - start_pos[1]))))
+            elif current_tool == 'right triangle':
+                end_pos = event.pos
+                pygame.draw.line(screen, current_color, start_pos, end_pos)
+                pygame.draw.line(screen, current_color, (start_pos[0], end_pos[1]), end_pos)
+                pygame.draw.line(screen, current_color, start_pos, (start_pos[0], end_pos[1]))
+            elif current_tool == 'equilateral triangle':
+                end_pos = event.pos
+                pygame.draw.line(screen, current_color, ((start_pos[0] + end_pos[0]) / 2, start_pos[1]), end_pos)
+                pygame.draw.line(screen, current_color, (start_pos[0], end_pos[1]), end_pos)
+                pygame.draw.line(screen, current_color, ((start_pos[0] + end_pos[0]) / 2, start_pos[1]), (start_pos[0], end_pos[1]))
+            elif current_tool == 'rhombus':
+                end_pos = event.pos
+                pygame.draw.line(screen, current_color, ((start_pos[0] + end_pos[0]) / 2, start_pos[1]), (end_pos[0], (end_pos[1] + start_pos[1]) / 2))
+                pygame.draw.line(screen, current_color, (start_pos[0], (end_pos[1] + start_pos[1]) / 2), ((start_pos[0] + end_pos[0]) / 2, end_pos[1]))
+                pygame.draw.line(screen, current_color, ((start_pos[0] + end_pos[0]) / 2, start_pos[1]), (start_pos[0], (end_pos[1] + start_pos[1]) / 2))
+                pygame.draw.line(screen, current_color, (end_pos[0], (end_pos[1] + start_pos[1]) / 2), ((start_pos[0] + end_pos[0]) / 2, end_pos[1]))
+                
+            
+            
+                
 
     pygame.display.flip()
-
-
